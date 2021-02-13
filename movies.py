@@ -77,5 +77,51 @@ def generate_data_frame(xls):
     return df
 
 
+def plot_data(x, y, df):
+    """
+    Função que plota os dados das colunas x e y.
+
+    Parâmetros
+    ----------
+        x: str
+            Coluna "x" a ser analisada.
+        y: str
+            Coluna "y" a ser analisada.
+        df: pd.DataFrame
+            Dataframe contendo as colunas a serem analisadas.
+    Retorna
+    ------
+        None
+
+    Exemplo
+    --------
+    >>> x = "Year"
+    >>> y = "Duration"
+    >>> xls = xls_verifier(save=False)
+    >>> df = generate_data_frame(xls)
+    >>> df.plot_data(x,y,df)
+    """
+
+    df_columns_list = list(df.columns)
+
+    assert x in df_columns_list, f"Coluna {x} não existe."
+    assert y in df_columns_list, f"Coluna {y} não existe."
+
+    assert x in list(
+        (df._get_numeric_data()).columns
+    ), f"Coluna {x} não possui valores numéricos."
+
+    assert y in list(
+        (df._get_numeric_data()).columns
+    ), f"Coluna {y} não possui valores numéricos."
+
+    df_plot = pd.DataFrame({x: df[x], y: df[y]})
+    df_plot.dropna(inplace=True)
+
+    fig = df_plot.plot.scatter(x, y)
+    fig.show()
+
+
 xls = xls_verifier(save=True)
 df = generate_data_frame(xls)
+plot_data(x, y, df)
