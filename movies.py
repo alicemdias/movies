@@ -5,8 +5,8 @@ from pathlib import Path
 
 pd.options.plotting.backend = "plotly"
 
-x = sys.argv[1]
-y = sys.argv[2]
+x = sys.argv[1].replace('_',' ')
+y = sys.argv[2].replace('_',' ')
 
 
 def xls_verifier(save=True):
