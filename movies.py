@@ -1,8 +1,6 @@
 import pandas as pd
 import requests
 import sys
-from plotly import express as px
-from plotly import graph_objects as go
 from pathlib import Path
 
 pd.options.plotting.backend = "plotly"
